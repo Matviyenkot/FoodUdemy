@@ -312,5 +312,57 @@ window.addEventListener('DOMContentLoaded', () => {
             closeModal();
         }, 4000);
     }
+
+    ////////////photo animation
+
+    const offerSlide = document.querySelectorAll('.offer__slide');
+    const nextButton = document.querySelector('.offer__slider-next');
+    const prevButton = document.querySelector('.offer__slider-prev');
+    const currentSlide = document.querySelector('#current');
+    let counter = 1;
+
+    slider(counter);
+
+
+    function slider(n){
+
+        if(n > offerSlide.length){
+            counter = 1;
+        }
+
+        if (n < 1){
+            counter = offerSlide.length;
+        }
+
+
+
+        offerSlide.forEach((e)=>{
+            e.style.display = 'none';
+        });
+
+        offerSlide[counter -1].style.display = 'block';
+
+        if(offerSlide.length < 10){
+            currentSlide.textContent = `0${counter}`;
+        } else {
+            currentSlide.textContent = `${counter}`;
+        }
+        
+    }
+
+    function changeSlides(n){
+        slider(counter += n);
+        
+    }
+
+    nextButton.addEventListener('click', ()=>{
+        changeSlides(1);
+    });
+
+   prevButton.addEventListener('click', ()=>{
+        changeSlides(-1);
+        
+    });
+
     
     });
